@@ -8,10 +8,43 @@
 // Be sure that you only ever include this mixin once!
 @include mat.core();
 
+$my-colors: (
+  50: #ec9248,
+  100: #e86800,
+  200: #b65200,
+  300: #e86800,
+  400: #e86800,
+  500: #e86800,
+  600: #e86800,
+  700: #e86800,
+  800: #e86800,
+  900: #e86800,
+  A100: #e86800,
+  A200: #e86800,
+  A400: #e86800,
+  A700: #e86800,
+  contrast: (
+    50: white,
+    100: white,
+    200: white,
+    300: white,
+    400: white,
+    500: white,
+    600: white,
+    700: white,
+    800: white,
+    900: white,
+    A100: white,
+    A200: white,
+    A400: white,
+    A700: white,
+  ),
+);
+
 // Define the palettes for your theme using the Material Design palettes available in palette.scss
 // (imported above). For each palette, you can optionally specify a default, lighter, and darker
 // hue. Available color palettes: https://material.io/design/color/
-$codelab-front-primary: mat.define-palette(mat.$indigo-palette);
+$codelab-front-primary: mat.define-palette($my-colors, 100, 50, 200);
 $codelab-front-accent: mat.define-palette(mat.$pink-palette, A200, A100, A400);
 
 // The warn palette is optional (defaults to red).
