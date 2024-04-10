@@ -8,9 +8,5 @@ import { Component } from '@angular/core';
   styleUrl: './app.component.scss',
 })
 export class AppComponent {
-  nome = 'Henrique';
-
-  printaNome() {
-    console.log(this.nome);
-  }
+  nome = 'Code Lab';
 }
