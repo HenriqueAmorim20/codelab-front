@@ -1,0 +1,32 @@
+.menu-container {
+  height: 100vh;
+  width: 100vw;
+  overflow: hidden;
+
+  header {
+    height: 3rem;
+    background-color: yellow;
+  }
+
+  .content-container {
+    display: flex;
+    max-height: calc(100vh - 5rem);
+
+    aside {
+      background-color: red;
+      width: 4.5rem;
+    }
+
+    .content {
+      width: 100%;
+      overflow-y: scroll;
+      background-color: blue;
+      padding: 1rem;
+    }
+  }
+
+  footer {
+    background-color: green;
+    height: 2rem;
+  }
+}
