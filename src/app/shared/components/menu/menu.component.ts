@@ -5,7 +5,6 @@ import { MatIconModule } from '@angular/material/icon';
 interface IMenuItem {
   label: string;
   icon: string;
-  path: string;
 }
 
 @Component({
@@ -20,11 +19,6 @@ export class MenuComponent {
     {
       label: 'Home',
       icon: 'home',
-      path: '/',
     },
   ];
-
-  handleNavigation(path: string): void {
-    console.log(path);
-  }
 }
