@@ -1,0 +1,25 @@
+.page-card {
+  margin: 1rem;
+  padding: 1rem;
+  border-radius: 0.5rem;
+  box-shadow: 0.25rem 0.25rem 0.5rem #0000003e;
+
+  header {
+    display: flex;
+    align-items: center;
+    margin-bottom: 2rem;
+
+    h1 {
+      margin-right: 1rem;
+      color: var(--color-primary);
+      font-size: 0.95rem;
+      white-space: nowrap;
+    }
+
+    .separator {
+      flex: auto;
+      height: 1px;
+      border-bottom: 0.1px solid rgba(0, 0, 0, 0.3);
+    }
+  }
+}
