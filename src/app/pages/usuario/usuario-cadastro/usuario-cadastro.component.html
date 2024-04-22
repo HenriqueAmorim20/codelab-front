@@ -4,11 +4,14 @@
   </ng-container>
 
   <ng-container rightActions>
-    <cl-save-add-action (saveAddEmitter)="saveAdd()"></cl-save-add-action>
+    <cl-save-add-action (saveAddEmitter)="save(true)"></cl-save-add-action>
     <cl-save-action (saveEmitter)="save()"></cl-save-action>
   </ng-container>
 
   <ng-container content>
-    <span>Cadastro usuário works!</span>
+    <cl-form-fields-list
+      [fields]="cadastroFields"
+      [form]="cadastroForm"
+    ></cl-form-fields-list>
   </ng-container>
 </cl-page-layout>
