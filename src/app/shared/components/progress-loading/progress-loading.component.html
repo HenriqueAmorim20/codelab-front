@@ -1,0 +1,7 @@
+<mat-progress-bar
+  *ngIf="loading; else loadingPlaceholder"
+  mode="indeterminate"
+></mat-progress-bar>
+<ng-template #loadingPlaceholder>
+  <div class="loading-placeholder"></div>
+</ng-template>
