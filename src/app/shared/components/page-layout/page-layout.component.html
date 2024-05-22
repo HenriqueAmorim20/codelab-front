@@ -1,0 +1,18 @@
+<cl-action-bar actionBar>
+  <ng-container leftActions>
+    <ng-content select="[leftActions]"></ng-content>
+  </ng-container>
+
+  <ng-container rightActions>
+    <ng-content select="[rightActions]"></ng-content>
+  </ng-container>
+</cl-action-bar>
+
+<div class="page-card">
+  <header>
+    <h1>{{ title }}</h1>
+    <div class="separator"></div>
+  </header>
+
+  <ng-content select="[content]"></ng-content>
+</div>

@@ -14,7 +14,8 @@ aside {
     align-items: center;
     cursor: pointer;
     transition: 0.2s all ease;
-    margin-bottom: 1rem;
+    margin-bottom: 1.5rem;
+    color: var(--color-secondary);
 
     &:hover {
       color: var(--color-primary);

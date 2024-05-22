@@ -1,0 +1,37 @@
+.action-bar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 1rem;
+  height: 2.2rem;
+  background-color: var(--color-gray-50);
+
+  .action-container {
+    display: flex;
+    align-items: center;
+  }
+}
+
+:host ::ng-deep .action-icon {
+  margin-top: 0.3rem;
+  margin-right: 0.8rem;
+  color: var(--color-secondary);
+  transition: 0.2s all ease;
+  cursor: pointer;
+
+  &:hover {
+    color: var(--color-primary);
+  }
+}
+
+:host ::ng-deep .action-btn {
+  margin-left: 0.8rem;
+  height: 1.7rem !important;
+  font-size: 0.8rem !important;
+  border: 0.1px solid black !important;
+  padding: 0 1rem !important;
+
+  &.mat-primary {
+    border-color: var(--color-primary) !important;
+  }
+}
