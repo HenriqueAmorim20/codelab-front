@@ -6,6 +6,7 @@ import { Router } from '@angular/router';
 interface IMenuItem {
   label: string;
   icon: string;
+  path: string;
 }
 
 @Component({
@@ -22,6 +23,7 @@ export class MenuComponent {
     {
       label: 'Home',
       icon: 'home',
+      path: '/',
     },
     {
       label: 'Usuário',

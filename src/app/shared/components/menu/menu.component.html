@@ -1,6 +1,14 @@
 <aside>
-  <div *ngFor="let menuItem of menuItems" class="menu-item">
-    <mat-icon class="menu-item__icon" [fontIcon]="menuItem.icon"></mat-icon>
+  <div
+    *ngFor="let menuItem of menuItems"
+    class="menu-item"
+    (click)="handleNavigation(menuItem.path)"
+  >
+    <mat-icon
+      class="menu-item__icon"
+      aria-hidden="false"
+      [fontIcon]="menuItem.icon"
+    ></mat-icon>
 
     <span class="menu-item__label">{{ menuItem.label }}</span>
   </div>
