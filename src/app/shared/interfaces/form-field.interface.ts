@@ -2,10 +2,10 @@ import { EFieldType } from '../enums/field-type.enum';
 
 export interface ILabelValue {
   label: string;
-  value: number;
+  value: unknown;
 }
 
-export interface IFilterField {
+export interface IFormField {
   type: EFieldType;
   class: string;
   label: string;

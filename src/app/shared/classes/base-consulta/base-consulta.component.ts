@@ -4,7 +4,7 @@ import { MatTableDataSource } from '@angular/material/table';
 import { MatPaginator, PageEvent } from '@angular/material/paginator';
 import { getPaginatorIntl } from '../../helpers/paginator-intl.helper';
 import { FormGroup } from '@angular/forms';
-import { IFilterField } from '../../interfaces/filter-field.interface';
+import { IFormField } from '../../interfaces/form-field.interface';
 import { BaseResourceService } from '../base-resource-service/base-resource.service';
 
 @Component({ template: '' })
@@ -19,7 +19,7 @@ export abstract class BaseConsultaComponent<TData>
   sort: Sort = { active: 'id', direction: '' };
   page: PageEvent = { pageIndex: 0, pageSize: 5, length: 0 };
 
-  abstract filterFields: IFilterField[];
+  abstract filterFields: IFormField[];
   abstract filterFormGroup: FormGroup;
 
   get filterValues() {

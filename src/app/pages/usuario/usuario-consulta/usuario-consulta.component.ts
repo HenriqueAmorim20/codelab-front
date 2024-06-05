@@ -11,9 +11,9 @@ import { FormControl, FormGroup } from '@angular/forms';
 import { FormatIdPipe } from '../../../shared/pipes/format-id.pipe';
 import { IUsuario } from '../usuario.interface';
 import {
-  IFilterField,
+  IFormField,
   ILabelValue,
-} from '../../../shared/interfaces/filter-field.interface';
+} from '../../../shared/interfaces/form-field.interface';
 import { EFieldType } from '../../../shared/enums/field-type.enum';
 import { FormFieldsListComponent } from '../../../shared/components/form-fields-list/form-fields-list.component';
 import { BaseConsultaComponent } from '../../../shared/classes/base-consulta/base-consulta.component';
@@ -49,15 +49,15 @@ export class UsuarioConsultaComponent extends BaseConsultaComponent<IUsuario> {
     },
     {
       label: 'Sim',
-      value: 1,
+      value: true,
     },
     {
       label: 'Não',
-      value: 2,
+      value: false,
     },
   ];
 
-  filterFields: IFilterField[] = [
+  filterFields: IFormField[] = [
     {
       type: EFieldType.Input,
       class: 'grid-1',

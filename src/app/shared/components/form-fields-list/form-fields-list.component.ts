@@ -7,7 +7,7 @@ import {
   Output,
 } from '@angular/core';
 import { FormGroup, FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { IFilterField } from '../../interfaces/filter-field.interface';
+import { IFormField } from '../../interfaces/form-field.interface';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 import { MatInputModule } from '@angular/material/input';
@@ -33,7 +33,7 @@ const components = [
 })
 export class FormFieldsListComponent implements OnInit, OnDestroy {
   @Input({ required: true }) form!: FormGroup;
-  @Input({ required: true }) fields!: IFilterField[];
+  @Input({ required: true }) fields!: IFormField[];
   @Output() searchEmitter = new EventEmitter<void>();
 
   private readonly unsubscribe$ = new Subject<void>();
