@@ -1,0 +1,33 @@
+<form class="filters" [formGroup]="formGroup">
+  <div *ngFor="let field of fields" class="form-field" [class]="field.class">
+    <span class="field-label">{{ field.label }}</span>
+
+    <div [ngSwitch]="field.type">
+      <mat-form-field *ngSwitchCase="0">
+        <input
+          type="text"
+          matInput
+          [placeholder]="field.placeholder"
+          [formControlName]="field.formControlName"
+          [imask]="field.mask"
+        />
+      </mat-form-field>
+
+      <mat-form-field *ngSwitchCase="1">
+        <mat-select [formControlName]="field.formControlName">
+          <mat-option
+            *ngFor="let option of field.options | async"
+            [value]="option.value"
+          >
+            {{ option.label }}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+    </div>
+  </div>
+</form>
+
+<button mat-flat-button color="primary" class="search-btn" (click)="search()">
+  consultar
+  <mat-icon fontIcon="search"></mat-icon>
+</button>
