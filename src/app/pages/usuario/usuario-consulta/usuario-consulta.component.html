@@ -5,11 +5,11 @@
   </ng-container>
 
   <ng-container content>
-    <cl-table-filters
-      [formGroup]="filterFormGroup"
+    <cl-form-fields-list
+      [form]="filterFormGroup"
       [fields]="filterFields"
       (searchEmitter)="search()"
-    ></cl-table-filters>
+    ></cl-form-fields-list>
 
     <table
       mat-table

@@ -1,4 +1,4 @@
-<form class="filters" [formGroup]="formGroup">
+<form class="filters" [formGroup]="form">
   <div *ngFor="let field of fields" class="form-field" [class]="field.class">
     <span class="field-label">{{ field.label }}</span>
 
@@ -26,8 +26,3 @@
     </div>
   </div>
 </form>
-
-<button mat-flat-button color="primary" class="search-btn" (click)="search()">
-  consultar
-  <mat-icon fontIcon="search"></mat-icon>
-</button>

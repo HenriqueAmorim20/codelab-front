@@ -9,13 +9,13 @@ import { MatPaginatorModule } from '@angular/material/paginator';
 import { BoolToTextPipe } from '../../../shared/pipes/bool-to-text.pipe';
 import { FormControl, FormGroup } from '@angular/forms';
 import { FormatIdPipe } from '../../../shared/pipes/format-id.pipe';
-import { IUsuarioForm, IUsuario } from '../usuario.interface';
+import { IUsuario } from '../usuario.interface';
 import {
   IFilterField,
   ILabelValue,
 } from '../../../shared/interfaces/filter-field.interface';
 import { EFieldType } from '../../../shared/enums/field-type.enum';
-import { TableFiltersComponent } from '../../../shared/components/table-filters/table-filters.component';
+import { FormFieldsListComponent } from '../../../shared/components/form-fields-list/form-fields-list.component';
 import { BaseConsultaComponent } from '../../../shared/classes/base-consulta/base-consulta.component';
 import { EmptyRowComponent } from '../../../shared/components/empty-row/empty-row.component';
 import { intMask } from '../../../shared/masks/masks';
@@ -29,7 +29,7 @@ const imports = [
   ...pipes,
   EmptyRowComponent,
   PageLayoutComponent,
-  TableFiltersComponent,
+  FormFieldsListComponent,
 ];
 
 @Component({
@@ -39,10 +39,7 @@ const imports = [
   templateUrl: './usuario-consulta.component.html',
   styleUrl: './usuario-consulta.component.scss',
 })
-export class UsuarioConsultaComponent extends BaseConsultaComponent<
-  IUsuario,
-  IUsuarioForm
-> {
+export class UsuarioConsultaComponent extends BaseConsultaComponent<IUsuario> {
   displayedColumns: string[] = ['id', 'nome', 'email', 'admin'];
 
   adminOptions: ILabelValue[] = [
@@ -93,7 +90,7 @@ export class UsuarioConsultaComponent extends BaseConsultaComponent<
     },
   ];
 
-  filterFormGroup = new FormGroup<IUsuarioForm>({
+  filterFormGroup = new FormGroup({
     id: new FormControl(null),
     nome: new FormControl(null),
     email: new FormControl(null),

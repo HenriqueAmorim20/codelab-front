@@ -3,15 +3,12 @@ import { Sort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
 import { MatPaginator, PageEvent } from '@angular/material/paginator';
 import { getPaginatorIntl } from '../../helpers/paginator-intl.helper';
-import { AbstractControl, FormGroup } from '@angular/forms';
+import { FormGroup } from '@angular/forms';
 import { IFilterField } from '../../interfaces/filter-field.interface';
 import { BaseResourceService } from '../base-resource-service/base-resource.service';
 
 @Component({ template: '' })
-export abstract class BaseConsultaComponent<
-    TData,
-    TForm extends { [K in keyof TForm]: AbstractControl<unknown, unknown> },
-  >
+export abstract class BaseConsultaComponent<TData>
   implements OnInit, AfterViewInit
 {
   @ViewChild(MatPaginator) paginatorEl!: MatPaginator;
@@ -23,7 +20,7 @@ export abstract class BaseConsultaComponent<
   page: PageEvent = { pageIndex: 0, pageSize: 5, length: 0 };
 
   abstract filterFields: IFilterField[];
-  abstract filterFormGroup: FormGroup<TForm>;
+  abstract filterFormGroup: FormGroup;
 
   get filterValues() {
     return this.filterFormGroup.getRawValue();
@@ -50,7 +47,6 @@ export abstract class BaseConsultaComponent<
   }
 
   search() {
-    console.log(this.page, this.sort, this.filterValues);
     this._service
       .findAll(this.page, this.sort, this.filterValues)
       .then((res) => {

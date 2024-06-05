@@ -1,4 +1,11 @@
-import { Component, EventEmitter, Input, Output } from '@angular/core';
+import {
+  Component,
+  EventEmitter,
+  Input,
+  OnDestroy,
+  OnInit,
+  Output,
+} from '@angular/core';
 import { FormGroup, FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { IFilterField } from '../../interfaces/filter-field.interface';
 import { MatButtonModule } from '@angular/material/button';
@@ -7,6 +14,7 @@ import { MatInputModule } from '@angular/material/input';
 import { MatSelectModule } from '@angular/material/select';
 import { CommonModule } from '@angular/common';
 import { IMaskModule } from 'angular-imask';
+import { Subject, debounceTime, takeUntil, tap } from 'rxjs';
 
 const form = [ReactiveFormsModule, FormsModule];
 const components = [
@@ -17,18 +25,35 @@ const components = [
 ];
 
 @Component({
-  selector: 'cl-table-filters',
+  selector: 'cl-form-fields-list',
   standalone: true,
   imports: [...form, ...components, CommonModule, IMaskModule],
-  templateUrl: './table-filters.component.html',
-  styleUrl: './table-filters.component.scss',
+  templateUrl: './form-fields-list.component.html',
+  styleUrl: './form-fields-list.component.scss',
 })
-export class TableFiltersComponent {
-  @Input({ required: true }) formGroup!: FormGroup;
+export class FormFieldsListComponent implements OnInit, OnDestroy {
+  @Input({ required: true }) form!: FormGroup;
   @Input({ required: true }) fields!: IFilterField[];
   @Output() searchEmitter = new EventEmitter<void>();
 
-  search() {
-    this.searchEmitter.emit();
+  private readonly unsubscribe$ = new Subject<void>();
+
+  ngOnInit(): void {
+    this.watchChanges();
+  }
+
+  private watchChanges() {
+    this.form.valueChanges
+      .pipe(
+        takeUntil(this.unsubscribe$),
+        debounceTime(1000),
+        tap(() => this.searchEmitter.emit()),
+      )
+      .subscribe();
+  }
+
+  ngOnDestroy(): void {
+    this.unsubscribe$.next();
+    this.unsubscribe$.complete();
   }
 }
