@@ -15,8 +15,9 @@ import { MatSelectModule } from '@angular/material/select';
 import { CommonModule } from '@angular/common';
 import { IMaskModule } from 'angular-imask';
 import { Subject, debounceTime, takeUntil, tap } from 'rxjs';
+import { FormFieldComponent } from '../form-field/form-field.component';
 
-const form = [ReactiveFormsModule, FormsModule];
+const form = [ReactiveFormsModule, FormsModule, FormFieldComponent];
 const components = [
   MatInputModule,
   MatSelectModule,

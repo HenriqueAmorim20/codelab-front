@@ -1,6 +1,6 @@
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { Component, Input } from '@angular/core';
-import { IFormField } from '../../interfaces/filter-field.interface';
+import { IFormField } from '../../interfaces/form-field.interface';
 import {
   AbstractControl,
   FormGroup,
