@@ -4,8 +4,8 @@ import { MatTableDataSource } from '@angular/material/table';
 import { MatPaginator, PageEvent } from '@angular/material/paginator';
 import { getPaginatorIntl } from '../../helpers/paginator-intl.helper';
 import { FormGroup } from '@angular/forms';
-import { IFormField } from '../../interfaces/form-field.interface';
 import { BaseResourceService } from '../base-resource-service/base-resource.service';
+import { IFormField } from '../../interfaces/form-field.interface';
 
 @Component({ template: '' })
 export abstract class BaseConsultaComponent<TData>
@@ -25,6 +25,8 @@ export abstract class BaseConsultaComponent<TData>
   get filterValues() {
     return this.filterFormGroup.getRawValue();
   }
+
+  loading = false;
 
   constructor(private readonly _service: BaseResourceService<TData>) {}
 
@@ -47,11 +49,16 @@ export abstract class BaseConsultaComponent<TData>
   }
 
   search() {
+    this.loading = true;
+
     this._service
       .findAll(this.page, this.sort, this.filterValues)
       .then((res) => {
         this.dataSource.data = res.data;
         this.paginatorEl.length = res.count;
+      })
+      .finally(() => {
+        setTimeout(() => (this.loading = false), 2000);
       });
   }
 }

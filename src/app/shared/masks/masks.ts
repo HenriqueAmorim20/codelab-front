@@ -4,3 +4,7 @@ export const intMask = {
   padFractionalZeros: false,
   normalizeZeros: true,
 };
+
+export const idMask = {
+  mask: '000000',
+};

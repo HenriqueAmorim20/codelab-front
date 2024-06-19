@@ -1,0 +1,34 @@
+<form [formGroup]="form" class="form-field">
+  <span *ngIf="field.type !== 2" class="field-label">
+    {{ label }}
+  </span>
+
+  <ng-container [ngSwitch]="field.type">
+    <mat-form-field *ngSwitchCase="0">
+      <input
+        type="text"
+        matInput
+        [placeholder]="field.placeholder"
+        [formControlName]="field.formControlName"
+        [imask]="field.mask"
+      />
+    </mat-form-field>
+
+    <mat-form-field *ngSwitchCase="1">
+      <mat-select [formControlName]="field.formControlName">
+        <mat-option
+          *ngFor="let option of field.options | async"
+          [value]="option.value"
+        >
+          {{ option.label }}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+
+    <mat-checkbox *ngSwitchCase="2" [formControlName]="field.formControlName">
+      <span class="field-label">{{ label }}</span>
+    </mat-checkbox>
+  </ng-container>
+
+  <mat-error>{{ error }}</mat-error>
+</form>

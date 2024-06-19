@@ -26,4 +26,8 @@ export abstract class BaseResourceService<TData> {
       count: this.mockedData.length,
     });
   }
+
+  create(data: TData): Promise<TData> {
+    return Promise.resolve(data);
+  }
 }

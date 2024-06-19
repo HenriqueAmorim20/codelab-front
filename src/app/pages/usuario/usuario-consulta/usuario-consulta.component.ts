@@ -10,15 +10,17 @@ import { BoolToTextPipe } from '../../../shared/pipes/bool-to-text.pipe';
 import { FormControl, FormGroup } from '@angular/forms';
 import { FormatIdPipe } from '../../../shared/pipes/format-id.pipe';
 import { IUsuario } from '../usuario.interface';
-import {
-  IFormField,
-  ILabelValue,
-} from '../../../shared/interfaces/form-field.interface';
 import { EFieldType } from '../../../shared/enums/field-type.enum';
 import { FormFieldsListComponent } from '../../../shared/components/form-fields-list/form-fields-list.component';
 import { BaseConsultaComponent } from '../../../shared/classes/base-consulta/base-consulta.component';
 import { EmptyRowComponent } from '../../../shared/components/empty-row/empty-row.component';
 import { intMask } from '../../../shared/masks/masks';
+import { ProgressLoadingComponent } from '../../../shared/components/progress-loading/progress-loading.component';
+import { CommonModule } from '@angular/common';
+import {
+  IFormField,
+  ILabelValue,
+} from '../../../shared/interfaces/form-field.interface';
 
 const actions = [BackActionComponent, AddActionComponent];
 const table = [MatTableModule, MatSortModule, MatPaginatorModule];
@@ -30,6 +32,8 @@ const imports = [
   EmptyRowComponent,
   PageLayoutComponent,
   FormFieldsListComponent,
+  ProgressLoadingComponent,
+  CommonModule,
 ];
 
 @Component({
