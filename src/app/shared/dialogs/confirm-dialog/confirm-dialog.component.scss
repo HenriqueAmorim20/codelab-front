@@ -1,0 +1,17 @@
+.confirm-dialog-header {
+  display: flex;
+  align-items: center;
+
+  h2 {
+    margin-right: 1rem;
+    color: var(--color-primary);
+    white-space: nowrap;
+    font-size: 1.1rem;
+  }
+
+  .separator {
+    flex: auto;
+    height: 1px;
+    border-bottom: 0.1px solid rgba(0, 0, 0, 0.3);
+  }
+}
