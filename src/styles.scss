@@ -141,3 +141,14 @@ body {
 [disabled] {
   cursor: not-allowed;
 }
+
+.consulta-edit-icon {
+  color: var(--color-secondary);
+  cursor: pointer;
+  font-size: 20px;
+}
+
+.consulta-actions-container {
+  text-align: center !important;
+  width: 30px;
+}

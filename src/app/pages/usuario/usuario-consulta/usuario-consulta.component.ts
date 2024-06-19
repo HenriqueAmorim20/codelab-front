@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, Injector } from '@angular/core';
 import { PageLayoutComponent } from '../../../shared/components/page-layout/page-layout.component';
 import { AddActionComponent } from '../../../shared/components/action-bar/add-action/add-action.component';
 import { BackActionComponent } from '../../../shared/components/action-bar/back-action/back-action.component';
@@ -21,6 +21,7 @@ import {
   IFormField,
   ILabelValue,
 } from '../../../shared/interfaces/form-field.interface';
+import { MatIconModule } from '@angular/material/icon';
 
 const actions = [BackActionComponent, AddActionComponent];
 const table = [MatTableModule, MatSortModule, MatPaginatorModule];
@@ -34,6 +35,7 @@ const imports = [
   FormFieldsListComponent,
   ProgressLoadingComponent,
   CommonModule,
+  MatIconModule,
 ];
 
 @Component({
@@ -44,7 +46,7 @@ const imports = [
   styleUrl: './usuario-consulta.component.scss',
 })
 export class UsuarioConsultaComponent extends BaseConsultaComponent<IUsuario> {
-  displayedColumns: string[] = ['id', 'nome', 'email', 'admin'];
+  displayedColumns: string[] = ['id', 'nome', 'email', 'admin', 'acoes'];
 
   adminOptions: ILabelValue[] = [
     {
@@ -101,7 +103,10 @@ export class UsuarioConsultaComponent extends BaseConsultaComponent<IUsuario> {
     admin: new FormControl(0),
   });
 
-  constructor(private readonly _usuarioService: UsuarioService) {
-    super(_usuarioService);
+  constructor(
+    private readonly _usuarioService: UsuarioService,
+    private readonly _injectorLocal: Injector,
+  ) {
+    super(_usuarioService, _injectorLocal);
   }
 }
