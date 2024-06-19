@@ -15,7 +15,11 @@ export const usuarioRoutes: Routes = [
         component: UsuarioCadastroComponent,
       },
       {
-        path: '',
+        path: 'editar/:id',
+        component: UsuarioCadastroComponent,
+      },
+      {
+        path: '**',
         redirectTo: 'consulta',
         pathMatch: 'full',
       },

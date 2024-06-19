@@ -28,6 +28,17 @@ export abstract class BaseResourceService<TData> {
   }
 
   create(data: TData): Promise<TData> {
-    return Promise.resolve(data);
+    return Promise.resolve({ ...data, id: 1 });
+  }
+
+  updateById(id: number, data: TData): Promise<TData> {
+    return Promise.resolve({ ...data, id: 1 });
+  }
+
+  findOneById(id: number): Promise<TData | undefined> {
+    // Gambiarra por não ter o back;
+    const data = this.mockedData as (TData & { id: number })[];
+    const value = data.find((item) => item.id === +id);
+    return Promise.resolve(value);
   }
 }

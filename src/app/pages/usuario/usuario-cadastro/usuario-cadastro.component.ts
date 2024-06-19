@@ -6,7 +6,6 @@ import { SaveAddActionComponent } from '../../../shared/components/action-bar/sa
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { IUsuario } from '../usuario.interface';
 import { UsuarioService } from '../usuario.service';
-import { intMask } from '../../../shared/masks/masks';
 import { EFieldType } from '../../../shared/enums/field-type.enum';
 import { CommonModule } from '@angular/common';
 import { BaseCadastroComponent } from '../../../shared/classes/base-cadastro/base-cadastro.component';
@@ -41,10 +40,7 @@ export class UsuarioCadastroComponent extends BaseCadastroComponent<IUsuario> {
 
   cadastroForm = new FormGroup({
     id: new FormControl({ value: null, disabled: true }),
-    nome: new FormControl(null, [
-      Validators.required,
-      Validators.minLength(10),
-    ]),
+    nome: new FormControl(null, [Validators.required, Validators.minLength(5)]),
     email: new FormControl(null, [Validators.email, Validators.required]),
     admin: new FormControl(false),
   });
@@ -56,7 +52,6 @@ export class UsuarioCadastroComponent extends BaseCadastroComponent<IUsuario> {
       label: 'Código',
       formControlName: 'id',
       placeholder: '',
-      mask: intMask,
     },
     {
       type: EFieldType.Input,
