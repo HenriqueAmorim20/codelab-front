@@ -39,8 +39,26 @@
         <td mat-cell *matCellDef="let row">{{ row.admin | boolToText }}</td>
       </ng-container>
 
+      <ng-container matColumnDef="acoes">
+        <th mat-header-cell *matHeaderCellDef>Ações</th>
+        <td mat-cell *matCellDef="let row" class="consulta-actions-container">
+          <mat-icon
+            class="consulta-edit-icon"
+            aria-label="Editar"
+            fontIcon="edit"
+            (click)="editar(row.id)"
+            width="18"
+            height="18"
+          ></mat-icon>
+        </td>
+      </ng-container>
+
       <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-      <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
+      <tr
+        mat-row
+        *matRowDef="let row; columns: displayedColumns"
+        (dblclick)="editar(row.id)"
+      ></tr>
 
       <cl-empty-row *matNoDataRow></cl-empty-row>
     </table>
