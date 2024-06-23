@@ -1,0 +1,18 @@
+<header mat-dialog-title class="confirm-dialog-header">
+  <h2>{{ title }}</h2>
+  <div class="separator"></div>
+</header>
+
+<mat-dialog-content class="mat-typography">
+  <span class="confirm-dialog-text">{{ contentText }}</span>
+</mat-dialog-content>
+
+<mat-dialog-actions align="end" class="confirm-dialog-actions">
+  <button mat-button color="secondary" [mat-dialog-close]="false">
+    {{ cancelText }}
+  </button>
+
+  <button mat-button color="primary" [mat-dialog-close]="true">
+    {{ confirmText }}
+  </button>
+</mat-dialog-actions>

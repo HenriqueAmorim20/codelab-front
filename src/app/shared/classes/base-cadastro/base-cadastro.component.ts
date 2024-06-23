@@ -3,10 +3,17 @@ import { BaseResourceService } from '../base-resource-service/base-resource.serv
 import { ActivatedRoute, Router } from '@angular/router';
 import { FormGroup } from '@angular/forms';
 import { IFormField } from '../../interfaces/form-field.interface';
+import {
+  CanComponentDeactivate,
+  TCanDeactivate,
+} from '../../guards/pending-changes.guard';
+import { Observable } from 'rxjs';
+import { MatDialog } from '@angular/material/dialog';
+import { ConfirmDialogComponent } from '../../dialogs/confirm-dialog/confirm-dialog.component';
 
 @Component({ template: '' })
 export abstract class BaseCadastroComponent<TData extends { id: number }>
-  implements OnInit
+  implements OnInit, CanComponentDeactivate
 {
   abstract cadastroFields: IFormField[];
   abstract cadastroForm: FormGroup;
@@ -15,10 +22,12 @@ export abstract class BaseCadastroComponent<TData extends { id: number }>
     return this.cadastroForm.getRawValue() as TData;
   }
 
+  protected initialFormValues!: TData;
   protected idEdit!: number;
 
   private readonly _router!: Router;
   private readonly _route!: ActivatedRoute;
+  private readonly _dialog!: MatDialog;
 
   constructor(
     private readonly _service: BaseResourceService<TData>,
@@ -26,6 +35,7 @@ export abstract class BaseCadastroComponent<TData extends { id: number }>
   ) {
     this._router = this._injector.get(Router);
     this._route = this._injector.get(ActivatedRoute);
+    this._dialog = this._injector.get(MatDialog);
   }
 
   ngOnInit(): void {
@@ -84,7 +94,7 @@ export abstract class BaseCadastroComponent<TData extends { id: number }>
   }
 
   protected actionsAfterUpdate(data: TData): void {
-    // empty
+    this.cadastroForm.markAsUntouched();
     console.log(data);
   }
 
@@ -96,5 +106,20 @@ export abstract class BaseCadastroComponent<TData extends { id: number }>
         this._router.navigate([`../editar/${id}`], { relativeTo: this._route });
       }
     });
+  }
+
+  canDeactivate(): TCanDeactivate {
+    if (!this.cadastroForm.touched) return true;
+
+    const ref = this._dialog.open(ConfirmDialogComponent, {
+      disableClose: true,
+      data: {
+        title: 'Alterações Pendentes',
+        contentText:
+          'Você possui alterações que não foram salvas, deseja mesmo sair da página?',
+      },
+    });
+
+    return ref.afterClosed() as unknown as Observable<boolean>;
   }
 }
