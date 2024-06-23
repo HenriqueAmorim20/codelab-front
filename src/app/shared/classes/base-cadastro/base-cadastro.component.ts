@@ -120,6 +120,6 @@ export abstract class BaseCadastroComponent<TData extends { id: number }>
       },
     });
 
-    return ref.afterClosed() as unknown as Observable<boolean>;
+    return ref.afterClosed();
   }
 }
