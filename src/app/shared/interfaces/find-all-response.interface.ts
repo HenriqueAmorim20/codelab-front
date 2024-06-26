@@ -1,5 +1,5 @@
-export interface IFindAllResponse<T> {
+export interface IResponse<T> {
   message: string;
-  data: T[];
-  count: number;
+  data: T;
+  count?: number;
 }

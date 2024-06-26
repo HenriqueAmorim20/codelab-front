@@ -69,12 +69,10 @@ export abstract class BaseConsultaComponent<TData>
 
     this._service
       .findAll(this.page, this.sort, this.filterValues)
-      .then((res) => {
+      .subscribe((res) => {
         this.dataSource.data = res.data;
-        this.paginatorEl.length = res.count;
-      })
-      .finally(() => {
-        setTimeout(() => (this.loading = false), 2000);
+        this.paginatorEl.length = res.count as number;
+        this.loading = false;
       });
   }
 
