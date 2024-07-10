@@ -43,6 +43,9 @@ export class UsuarioCadastroComponent extends BaseCadastroComponent<IUsuario> {
     nome: new FormControl(null, [Validators.required, Validators.minLength(5)]),
     email: new FormControl(null, [Validators.email, Validators.required]),
     admin: new FormControl(false),
+    ativo: new FormControl(true),
+    senha: new FormControl('temporario'),
+    permissao: new FormControl([]),
   });
 
   cadastroFields: IFormField[] = [

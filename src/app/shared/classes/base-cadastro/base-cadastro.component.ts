@@ -7,9 +7,10 @@ import {
   CanComponentDeactivate,
   TCanDeactivate,
 } from '../../guards/pending-changes.guard';
-import { Observable } from 'rxjs';
 import { MatDialog } from '@angular/material/dialog';
 import { ConfirmDialogComponent } from '../../dialogs/confirm-dialog/confirm-dialog.component';
+import { MatSnackBar } from '@angular/material/snack-bar';
+import { SnackbarComponent } from '../../components/snackbar/snackbar.component';
 
 @Component({ template: '' })
 export abstract class BaseCadastroComponent<TData extends { id: number }>
@@ -28,6 +29,7 @@ export abstract class BaseCadastroComponent<TData extends { id: number }>
   private readonly _router!: Router;
   private readonly _route!: ActivatedRoute;
   private readonly _dialog!: MatDialog;
+  private readonly _snackBar!: MatSnackBar;
 
   constructor(
     private readonly _service: BaseResourceService<TData>,
@@ -36,6 +38,7 @@ export abstract class BaseCadastroComponent<TData extends { id: number }>
     this._router = this._injector.get(Router);
     this._route = this._injector.get(ActivatedRoute);
     this._dialog = this._injector.get(MatDialog);
+    this._snackBar = this._injector.get(MatSnackBar);
   }
 
   ngOnInit(): void {
@@ -49,12 +52,12 @@ export abstract class BaseCadastroComponent<TData extends { id: number }>
       return;
     }
 
-    this._service.findOneById(this.idEdit).then((res) => {
+    this._service.findOneById(this.idEdit).subscribe((res) => {
       if (!res) {
         return this.navigateToCadastro();
       }
 
-      this.patchFormForEdit(res);
+      this.patchFormForEdit(res.data);
     });
   }
 
@@ -84,22 +87,28 @@ export abstract class BaseCadastroComponent<TData extends { id: number }>
   protected saveEditar(addNew: boolean): void {
     this._service
       .updateById(this.idEdit, this.cadastroFormValues)
-      .then((response) => {
+      .subscribe((response) => {
+        this.openSnackBar('success');
+        this.cadastroForm.markAsUntouched();
+
         if (addNew) {
           this.navigateToCadastro();
         } else {
-          this.actionsAfterUpdate(response);
+          this.actionsAfterUpdate(response.data);
         }
       });
   }
 
   protected actionsAfterUpdate(data: TData): void {
     this.cadastroForm.markAsUntouched();
-    console.log(data);
   }
 
   protected saveCadastro(addNew: boolean): void {
-    this._service.create(this.cadastroFormValues).then(({ id }) => {
+    this._service.create(this.cadastroFormValues).subscribe((response) => {
+      this.openSnackBar('success');
+      this.cadastroForm.markAsUntouched();
+      const id = response.data.id;
+
       if (addNew) {
         this.cadastroForm.reset();
       } else {
@@ -121,5 +130,12 @@ export abstract class BaseCadastroComponent<TData extends { id: number }>
     });
 
     return ref.afterClosed();
+  }
+
+  protected openSnackBar(panelClass: string | string[]) {
+    this._snackBar.openFromComponent(SnackbarComponent, {
+      duration: 150000,
+      panelClass,
+    });
   }
 }
