@@ -11,6 +11,8 @@ import { MatDialog } from '@angular/material/dialog';
 import { ConfirmDialogComponent } from '../../dialogs/confirm-dialog/confirm-dialog.component';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { SnackbarComponent } from '../../components/snackbar/snackbar.component';
+import { ISnackbarData } from '../../interfaces/snackbar-data.interface';
+import { ESnackbarType } from '../../enums/snackbar-type.enum';
 
 @Component({ template: '' })
 export abstract class BaseCadastroComponent<TData extends { id: number }>
@@ -53,7 +55,11 @@ export abstract class BaseCadastroComponent<TData extends { id: number }>
     }
 
     this._service.findOneById(this.idEdit).subscribe((res) => {
-      if (!res) {
+      if (!res.data) {
+        this.openSnackBar({
+          message: res.message,
+          type: ESnackbarType.error,
+        });
         return this.navigateToCadastro();
       }
 
@@ -78,6 +84,10 @@ export abstract class BaseCadastroComponent<TData extends { id: number }>
     this.cadastroForm.markAllAsTouched();
 
     if (!this.cadastroForm.valid) {
+      this.openSnackBar({
+        message: 'Campos obrigatórios não preenchidos!',
+        type: ESnackbarType.warning,
+      });
       return;
     }
 
@@ -88,10 +98,13 @@ export abstract class BaseCadastroComponent<TData extends { id: number }>
     this._service
       .updateById(this.idEdit, this.cadastroFormValues)
       .subscribe((response) => {
-        this.openSnackBar('success');
-        this.cadastroForm.markAsUntouched();
+        this.openSnackBar({
+          message: response.message,
+          type: ESnackbarType.success,
+        });
 
         if (addNew) {
+          this.cadastroForm.markAsUntouched();
           this.navigateToCadastro();
         } else {
           this.actionsAfterUpdate(response.data);
@@ -105,13 +118,16 @@ export abstract class BaseCadastroComponent<TData extends { id: number }>
 
   protected saveCadastro(addNew: boolean): void {
     this._service.create(this.cadastroFormValues).subscribe((response) => {
-      this.openSnackBar('success');
-      this.cadastroForm.markAsUntouched();
+      this.openSnackBar({
+        message: response.message,
+        type: ESnackbarType.success,
+      });
       const id = response.data.id;
 
       if (addNew) {
         this.cadastroForm.reset();
       } else {
+        this.cadastroForm.markAsUntouched();
         this._router.navigate([`../editar/${id}`], { relativeTo: this._route });
       }
     });
@@ -132,10 +148,15 @@ export abstract class BaseCadastroComponent<TData extends { id: number }>
     return ref.afterClosed();
   }
 
-  protected openSnackBar(panelClass: string | string[]) {
-    this._snackBar.openFromComponent(SnackbarComponent, {
-      duration: 150000,
-      panelClass,
-    });
+  protected openSnackBar(data: ISnackbarData, duration = 5000) {
+    this._snackBar.openFromComponent<SnackbarComponent, ISnackbarData>(
+      SnackbarComponent,
+      {
+        duration,
+        data,
+        panelClass: data.type,
+        horizontalPosition: 'end',
+      },
+    );
   }
 }

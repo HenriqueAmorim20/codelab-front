@@ -152,3 +152,43 @@ body {
   text-align: center !important;
   width: 30px;
 }
+
+.mat-mdc-snack-bar-container .mdc-snackbar__surface {
+  background-color: white !important;
+}
+
+.success-snackbar {
+  .mdc-snackbar__surface {
+    border-left: 5px solid #00b25c;
+  }
+  .snackbar-icon {
+    color: #00b25c;
+  }
+}
+
+.error-snackbar {
+  .mdc-snackbar__surface {
+    border-left: 5px solid #e80000;
+  }
+  .snackbar-icon {
+    color: #e80000;
+  }
+}
+
+.warning-snackbar {
+  .mdc-snackbar__surface {
+    border-left: 5px solid #e86800;
+  }
+  .snackbar-icon {
+    color: #e86800;
+  }
+}
+
+.info-snackbar {
+  .mdc-snackbar__surface {
+    border-left: 5px solid #0000ff;
+  }
+  .snackbar-icon {
+    color: #0000ff;
+  }
+}

@@ -35,6 +35,7 @@ const components = [
 export class FormFieldsListComponent implements OnInit, OnDestroy {
   @Input({ required: true }) form!: FormGroup;
   @Input({ required: true }) fields!: IFormField[];
+  @Input() disableWatch = false;
   @Output() searchEmitter = new EventEmitter<void>();
 
   private readonly unsubscribe$ = new Subject<void>();
@@ -44,6 +45,8 @@ export class FormFieldsListComponent implements OnInit, OnDestroy {
   }
 
   private watchChanges() {
+    if (this.disableWatch) return;
+
     this.form.valueChanges
       .pipe(
         takeUntil(this.unsubscribe$),
