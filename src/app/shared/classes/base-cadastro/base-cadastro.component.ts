@@ -48,17 +48,23 @@ export abstract class BaseCadastroComponent<TData extends { id: number }>
   }
 
   protected handleEdit(): void {
-    this.idEdit = this._route.snapshot.params['id'];
+    const id = this._route.snapshot.params['id'];
 
-    if (!this.idEdit) {
+    if (!id) {
       return;
     }
+
+    if (isNaN(Number(id))) {
+      return this.navigateToCadastro();
+    }
+
+    this.idEdit = +id;
 
     this._service.findOneById(this.idEdit).subscribe((res) => {
       if (!res.data) {
         this.openSnackBar({
-          message: res.message,
-          type: ESnackbarType.error,
+          message: 'Registro não encontrado!',
+          type: ESnackbarType.warning,
         });
         return this.navigateToCadastro();
       }
@@ -148,7 +154,7 @@ export abstract class BaseCadastroComponent<TData extends { id: number }>
     return ref.afterClosed();
   }
 
-  protected openSnackBar(data: ISnackbarData, duration = 5000) {
+  protected openSnackBar(data: ISnackbarData, duration = 50000) {
     this._snackBar.openFromComponent<SnackbarComponent, ISnackbarData>(
       SnackbarComponent,
       {

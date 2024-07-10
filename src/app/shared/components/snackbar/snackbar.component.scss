@@ -2,7 +2,10 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
-  border-left: 5px solid green;
+
+  .snackbar-message {
+    color: var(--color-default);
+  }
 
   .snackbar-close {
     font-size: 0.8rem;
