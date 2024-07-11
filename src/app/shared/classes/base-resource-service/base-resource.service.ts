@@ -5,6 +5,7 @@ import { Injectable, Injector } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable, take } from 'rxjs';
 import { handleFindAllFilter } from '../../helpers/filter.helper';
+import { environment } from '../../../../environments/environment';
 
 @Injectable({ providedIn: 'root' })
 export abstract class BaseResourceService<TData> {
@@ -13,11 +14,10 @@ export abstract class BaseResourceService<TData> {
 
   constructor(
     protected readonly _injector: Injector,
-    port: number,
     path: string,
   ) {
     this._http = this._injector.get(HttpClient);
-    this.url = `http://localhost:${port}/api/v1/${path}`;
+    this.url = `${environment.baseUrl}/${path}`;
   }
 
   findAll(
