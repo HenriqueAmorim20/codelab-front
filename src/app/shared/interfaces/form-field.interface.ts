@@ -13,4 +13,5 @@ export interface IFormField {
   placeholder: string;
   options?: Promise<ILabelValue[]>;
   mask?: any;
+  password?: boolean;
 }

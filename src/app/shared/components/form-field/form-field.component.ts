@@ -16,6 +16,7 @@ import { IMaskModule } from 'angular-imask';
 import { CommonModule } from '@angular/common';
 import { controlErrorMessages } from '../../helpers/form-error.helper';
 import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 
 const form = [ReactiveFormsModule, FormsModule];
 const components = [
@@ -25,6 +26,7 @@ const components = [
   MatIconModule,
   MatCheckboxModule,
   MatFormFieldModule,
+  MatSlideToggleModule,
 ];
 
 @Component({

@@ -18,25 +18,30 @@
       <img src="../../assets/images/logo_vr.svg" alt="" />
 
       <form class="login-form">
-        <mat-form-field class="form-field">
-          <mat-label>Email</mat-label>
-          <input type="email" matInput placeholder="Ex. pat@example.com" />
-          <!-- <mat-error>Please enter a valid email address</mat-error>
-          <mat-error>Email is <strong>required</strong></mat-error> -->
-        </mat-form-field>
+        <cl-form-field
+          [field]="emailInput"
+          [form]="loginForm"
+          class="form-field"
+        ></cl-form-field>
 
-        <mat-form-field class="form-field">
-          <mat-label>Senha</mat-label>
-          <input type="password" matInput />
-          <!-- <mat-error>Please enter a valid email address</mat-error>
-          <mat-error>Email is <strong>required</strong></mat-error> -->
-        </mat-form-field>
+        <cl-form-field
+          [field]="senhaInput"
+          [form]="loginForm"
+          class="form-field"
+        ></cl-form-field>
 
-        <mat-slide-toggle color="primary" class="toggle">
-          Lembrar meu usuário
-        </mat-slide-toggle>
+        <cl-form-field
+          [field]="lembrarInput"
+          [form]="loginForm"
+          class="form-field"
+        ></cl-form-field>
 
-        <button mat-flat-button color="primary" class="submit-btn">
+        <button
+          (click)="login($event)"
+          mat-flat-button
+          color="primary"
+          class="submit-btn"
+        >
           Entrar
         </button>
       </form>

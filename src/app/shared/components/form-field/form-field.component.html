@@ -1,12 +1,12 @@
 <form [formGroup]="form" class="form-field">
-  <span *ngIf="field.type !== 2" class="field-label">
+  <span *ngIf="![2, 4].includes(field.type)" class="field-label">
     {{ label }}
   </span>
 
   <ng-container [ngSwitch]="field.type">
     <mat-form-field *ngSwitchCase="0">
       <input
-        type="text"
+        [type]="field.password ? 'password' : 'text'"
         matInput
         [placeholder]="field.placeholder"
         [formControlName]="field.formControlName"
@@ -28,6 +28,14 @@
     <mat-checkbox *ngSwitchCase="2" [formControlName]="field.formControlName">
       <span class="field-label">{{ label }}</span>
     </mat-checkbox>
+
+    <mat-slide-toggle
+      *ngSwitchCase="4"
+      [formControlName]="field.formControlName"
+      color="primary"
+    >
+      {{ label }}
+    </mat-slide-toggle>
   </ng-container>
 
   <mat-error>{{ error }}</mat-error>
