@@ -37,11 +37,7 @@ export class MenuComponent implements OnInit {
     if (!user) return;
 
     this.menuPermissaoItems = menuPermissao.filter((menuItem) => {
-      const hasPermission = user.permissao.find((permissao) => {
-        return permissao.modulo === menuItem.modulo;
-      });
-
-      return !!hasPermission;
+      return user.modulos.includes(menuItem.modulo);
     });
   }
 

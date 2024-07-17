@@ -12,3 +12,10 @@ services:
     entrypoint: sh ./.docker/entrypoint.sh
     environment:
       - NODE_ENV=development
+    networks:
+      - codelab-net
+
+networks:
+  codelab-net:
+    name: codelab-net
+    external: true
