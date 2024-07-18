@@ -14,5 +14,22 @@
       [form]="cadastroForm"
       [disableWatch]="true"
     ></cl-form-fields-list>
+
+    <div class="permissoes-container">
+      <h2 class="permissoes-container__title">Pemissões</h2>
+
+      <form [formGroup]="cadastroForm">
+        <ng-container
+          *ngFor="let permissaoForm of permissaoFormArrayControls"
+          formArrayName="permissao"
+        >
+          <form [formGroup]="permissaoForm">
+            <mat-checkbox formControlName="checked">
+              <span class="field-label">{{ permissaoForm.value.label }}</span>
+            </mat-checkbox>
+          </form>
+        </ng-container>
+      </form>
+    </div>
   </ng-container>
 </cl-page-layout>
